@@ -1,1 +1,1 @@
-export { useLaunchContext } from "./LaunchContext";
+export { useLaunchContext, LaunchContext } from "./LaunchContext";

@@ -19,7 +19,7 @@ export const useLaunchContext = () => React.useContext(LaunchContext);
 
 export const LaunchProvider = ({ children }) => {
     const [items, setItems] = React.useState([]);
-    const [launchYears, setlaunchYears] = React.useState([]);
+    const [launchYears, setLaunchYears] = React.useState([]);
     const [sort, setSort] = React.useState(false);
     const [filter, setFilter] = React.useState("");
 
@@ -30,7 +30,7 @@ export const LaunchProvider = ({ children }) => {
                     setFilter("");
                     const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API);
                     const launchYearsArray = GetYearsArray(response);
-                    setlaunchYears(launchYearsArray);
+                    setLaunchYears(launchYearsArray);
                     setItems(response);
                 }, []),
                 items,
@@ -39,7 +39,7 @@ export const LaunchProvider = ({ children }) => {
                 filter,
                 setFilter,
                 launchYears,
-                setlaunchYears,
+                setLaunchYears,
             }}>
             {children}
         </LaunchContext.Provider>
