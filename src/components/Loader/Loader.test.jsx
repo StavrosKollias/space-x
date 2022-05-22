@@ -40,7 +40,7 @@ describe("Loader component", () => {
         expect(loaderMessage.textContent).toBe(LABEL.LOADING);
     });
 
-    test("Renders with =bounce component", () => {
+    test("Renders with error component", () => {
         TestingUtils.setLaunchContext({
             loadingState: { loading: false, error: true, message: LABEL.LOADING, errorMessage: LABEL.ERROR },
         });

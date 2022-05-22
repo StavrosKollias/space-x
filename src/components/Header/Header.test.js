@@ -49,7 +49,7 @@ describe("Header component", () => {
     });
 
     test("Renders with reload button", () => {
-        const { getByText, getByTestId } = TestingUtils.renderComponent(<Header />);
+        const { getByTestId } = TestingUtils.renderComponent(<Header />);
         const reloadButton = getByTestId("button-component");
         expect(reloadButton).not.toBeNull();
         expect(reloadButton.textContent).toBe(LABEL.RELOAD);

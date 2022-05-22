@@ -47,6 +47,16 @@ export const LaunchProvider = ({ children }) => {
         });
     };
 
+    const handleErrorResponse = () => {
+        setLoadingState((loadingState) => {
+            return {
+                ...loadingState,
+                loading: false,
+                error: true,
+            };
+        });
+    };
+
     return (
         <LaunchContext.Provider
             value={{
@@ -58,16 +68,8 @@ export const LaunchProvider = ({ children }) => {
                             loading: true,
                         };
                     });
-                    const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API, setLoadingState);
-                    response.error
-                        ? setLoadingState((loadingState) => {
-                              return {
-                                  ...loadingState,
-                                  loading: false,
-                                  error: true,
-                              };
-                          })
-                        : handleSuccessResponse(response);
+                    const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API);
+                    response.error ? handleErrorResponse() : handleSuccessResponse(response);
                 }, []),
                 items,
                 sort,

@@ -12,7 +12,7 @@ export const Body = () => {
     const { filter, setSort, sort, items, launchYears, loadingState } = useLaunchContext();
 
     return (
-        <div className='app__body'>
+        <div data-testid='body-component' className='app__body'>
             <div>
                 <img src={CONSTANTS.SPACE_X_IMAGE} srcSet={CONSTANTS.SPACE_X_RETINA_IMAGES} className='app__main-image' alt='Launch Home' />
             </div>

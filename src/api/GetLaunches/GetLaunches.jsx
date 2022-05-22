@@ -5,7 +5,6 @@ export const GetLaunchesAPI = async (url) => {
             return res.json();
         })
         .catch((error) => {
-            alert(error);
             return { error: error.message };
         });
 };
