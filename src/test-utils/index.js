@@ -13,5 +13,5 @@ export const renderComponent = (component) => {
 };
 
 export const setLaunchContext = (LaunchContext) => {
-    LaunchContextMock = LaunchContext;
+    LaunchContextMock = { ...LaunchContextMock, ...LaunchContext };
 };

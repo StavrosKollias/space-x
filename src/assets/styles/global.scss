@@ -1,4 +1,5 @@
 html {
+    // 11.25px why  not use reference 18 and use rems making life harder
     font-size: 62.5%;
 }
 
@@ -8,7 +9,7 @@ body {
     font-size: 1.4rem;
     overflow-x: hidden;
     margin: 0;
-    font-family: "Brandon Grotesque";
+    font-family: $font-family;
 }
 
 * {

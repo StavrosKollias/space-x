@@ -1,13 +1,13 @@
 // variables
 %flex {
-    display: flex;
-
     &-column {
+        display: flex;
         flex-direction: column;
     }
 
     &-row {
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
     }
 }
 

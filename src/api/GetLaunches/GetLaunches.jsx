@@ -1,6 +1,11 @@
 // Change below function to API call
 export const GetLaunchesAPI = async (url) => {
-    const res = await fetch(url);
-    const json = await res.json();
-    return json;
+    return fetch(url)
+        .then((res) => {
+            return res.json();
+        })
+        .catch((error) => {
+            alert(error);
+            return { error: error.message };
+        });
 };
