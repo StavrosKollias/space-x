@@ -6,7 +6,7 @@ import * as TestingHelper from "../../test-utils";
 import { Header } from "./Header";
 import LABEL from "../../constants/Labels";
 
-let clock;
+let debouceClock;
 
 const listLaunchesMock = jest.fn();
 const setSortMock = jest.fn();
@@ -14,7 +14,7 @@ const setFilterMock = jest.fn();
 const setLaunchYearsMock = jest.fn();
 
 beforeEach(() => {
-    clock = sinon.useFakeTimers();
+    debouceClock = sinon.useFakeTimers();
     debounce(listLaunchesMock, 300);
     TestingHelper.setLaunchContext({
         listLaunches: listLaunchesMock,
@@ -29,7 +29,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-    clock.restore();
+    debouceClock.restore();
 });
 
 describe("Header component", () => {
@@ -56,7 +56,7 @@ describe("Header component", () => {
         expect(reloadButton.textContent).toBe(LABEL.RELOAD);
         TestingHelper.act(() => {
             TestingHelper.fireEvent.click(reloadButton);
-            clock.tick(300);
+            debouceClock.tick(300);
             expect(listLaunchesMock).toHaveBeenCalledTimes(1);
         });
     });

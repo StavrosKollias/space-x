@@ -20,7 +20,6 @@ export const Header = () => {
                 data-testid='reload-button'
                 filter={filter}
                 onClick={() => {
-                    console.log("hello");
                     debouncedClickHandler();
                 }}
                 classes='button button--reload'

@@ -1,5 +1,5 @@
 // IMPORTS
-import { render, act } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { LaunchContext } from "../contexts/LaunchContext";
 
 // EXPORTS
