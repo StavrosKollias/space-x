@@ -21,7 +21,7 @@ beforeEach(() => {
     });
 });
 
-describe("Header component", () => {
+describe("Loader component", () => {
     test("Renders with no errors", () => {
         const { getByTestId } = TestingUtils.renderComponent(<Loader />);
         const loaderComponent = getByTestId("loader-component");

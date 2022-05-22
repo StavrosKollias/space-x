@@ -38,11 +38,12 @@ export const LaunchProvider = ({ children }) => {
         const launchYearsArray = GetYearsArray(response);
         setLaunchYears(launchYearsArray);
         setItems(response);
-        setLoadingState({
-            loading: false,
-            error: false,
-            message: LABEL.LOADING,
-            errorMessage: LABEL.ERROR,
+        setLoadingState((loadingState) => {
+            return {
+                ...loadingState,
+                loading: false,
+                error: false,
+            };
         });
     };
 
@@ -51,13 +52,20 @@ export const LaunchProvider = ({ children }) => {
             value={{
                 listLaunches: React.useCallback(async () => {
                     setFilter("");
+                    setLoadingState((loadingState) => {
+                        return {
+                            ...loadingState,
+                            loading: true,
+                        };
+                    });
                     const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API, setLoadingState);
                     response.error
-                        ? setLoadingState({
-                              loading: false,
-                              error: true,
-                              message: LABEL.LOADING,
-                              errorMessage: LABEL.ERROR,
+                        ? setLoadingState((loadingState) => {
+                              return {
+                                  ...loadingState,
+                                  loading: false,
+                                  error: true,
+                              };
                           })
                         : handleSuccessResponse(response);
                 }, []),
