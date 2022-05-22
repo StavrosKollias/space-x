@@ -1,5 +1,6 @@
 import React from "react";
 import { GetLaunchesAPI } from "../../api/GetLaunches";
+import { GetYearsArray } from "../../utils";
 import CONSTANTS from "../../constants/Config";
 
 export const launchContextDefaults = {
@@ -9,6 +10,8 @@ export const launchContextDefaults = {
     setSort: Function,
     filter: "",
     setFilter: Function,
+    launchYears: [],
+    setlaunchYears: Function,
 };
 
 export const LaunchContext = React.createContext(launchContextDefaults);
@@ -16,6 +19,7 @@ export const useLaunchContext = () => React.useContext(LaunchContext);
 
 export const LaunchProvider = ({ children }) => {
     const [items, setItems] = React.useState([]);
+    const [launchYears, setlaunchYears] = React.useState([]);
     const [sort, setSort] = React.useState(false);
     const [filter, setFilter] = React.useState("");
 
@@ -25,6 +29,8 @@ export const LaunchProvider = ({ children }) => {
                 listLaunches: React.useCallback(async () => {
                     setFilter("");
                     const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API);
+                    const launchYearsArray = GetYearsArray(response);
+                    setlaunchYears(launchYearsArray);
                     setItems(response);
                 }, []),
                 items,
@@ -32,6 +38,8 @@ export const LaunchProvider = ({ children }) => {
                 setSort,
                 filter,
                 setFilter,
+                launchYears,
+                setlaunchYears,
             }}>
             {children}
         </LaunchContext.Provider>

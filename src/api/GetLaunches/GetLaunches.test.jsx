@@ -1,5 +1,4 @@
 import { GetLaunchesAPI } from "./GetLaunches";
-// This is the section where we mock `fetch`
 const unmockedFetch = global.fetch;
 
 beforeAll(() => {
