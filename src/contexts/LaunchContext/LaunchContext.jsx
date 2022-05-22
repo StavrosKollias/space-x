@@ -38,23 +38,6 @@ export const LaunchProvider = ({ children }) => {
         const launchYearsArray = GetYearsArray(response);
         setLaunchYears(launchYearsArray);
         setItems(response);
-        setLoadingState((loadingState) => {
-            return {
-                ...loadingState,
-                loading: false,
-                error: false,
-            };
-        });
-    };
-
-    const handleErrorResponse = () => {
-        setLoadingState((loadingState) => {
-            return {
-                ...loadingState,
-                loading: false,
-                error: true,
-            };
-        });
     };
 
     return (
@@ -68,8 +51,9 @@ export const LaunchProvider = ({ children }) => {
                             loading: true,
                         };
                     });
-                    const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API);
-                    response.error ? handleErrorResponse() : handleSuccessResponse(response);
+                    GetLaunchesAPI(CONSTANTS.SPACE_X_API).then((response) => {
+                        if (response.data) handleSuccessResponse(response.data);
+                    });
                 }, []),
                 items,
                 sort,

@@ -55,7 +55,7 @@ describe("Header component", () => {
         expect(reloadButton.textContent).toBe(LABEL.RELOAD);
         TestingUtils.act(() => {
             TestingUtils.fireEvent.click(reloadButton);
-            debouceClock.tick(300);
+            debouceClock.tick(500);
             expect(listLaunchesMock).toHaveBeenCalledTimes(1);
         });
     });

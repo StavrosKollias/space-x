@@ -7,7 +7,7 @@ import { useLaunchContext } from "../../contexts/LaunchContext/LaunchContext";
 
 export const Header = () => {
     const { filter, listLaunches } = useLaunchContext();
-    const debouncedClickHandler = debounce(listLaunches, 300);
+    const debouncedClickHandler = debounce(listLaunches, 500);
     return (
         <header data-testid='header-component' className='app__header'>
             <div data-testid='header-logo-container' className='app__logo'>
