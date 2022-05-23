@@ -1,4 +1,5 @@
 .launch-list__item {
+    @extend %flex;
     @extend %flex-row;
     align-items: center;
     align-content: space-between;
@@ -30,6 +31,7 @@
         }
 
         &:nth-of-type(2) {
+            @extend %flex;
             @extend %flex-column;
 
             span {
