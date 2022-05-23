@@ -19,7 +19,7 @@ export const LaunchList = ({ items, filter, sort }) => {
     });
 
     return (
-        <ul className='launch-list'>
+        <ul data-testid='launch-list-component' className='launch-list'>
             {launches.map((item, index) => {
                 return <LaunchItem key={index} item={item} index={index} />;
             })}

@@ -9,17 +9,20 @@ export const Select = ({ label, classes, error, options, allowDisabledState }) =
     });
     return (
         <select
+            data-testid='select-component'
             name={label}
             className={selectClasses}
             onChange={(event) => {
                 setFilter(event.target.value);
             }}
             value={filter}>
-            <option value=''>{label}</option>
+            <option data-testid='select-option' value=''>
+                {label}
+            </option>
 
             {options.map((item, index) => {
                 return (
-                    <option key={index} value={item}>
+                    <option data-testid='select-option' key={index} value={item}>
                         {item}
                     </option>
                 );
