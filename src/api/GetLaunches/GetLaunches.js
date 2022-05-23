@@ -1,8 +1,6 @@
 // Change below function to API call
 import axios from "axios";
 
-// export const api = axios.create();
-
 export const GetLaunchesAPI = (url) => {
     const onSuccess = (response) => {
         return response;
