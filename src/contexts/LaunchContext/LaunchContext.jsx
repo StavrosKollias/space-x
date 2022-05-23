@@ -34,10 +34,10 @@ export const LaunchProvider = ({ children }) => {
     const [filter, setFilter] = React.useState("");
     const [loadingState, setLoadingState] = React.useState(loadingStateInitial);
 
-    const handleSuccessResponse = (response) => {
-        const launchYearsArray = GetYearsArray(response);
+    const handleSuccessResponse = (data) => {
+        const launchYearsArray = GetYearsArray(data);
         setLaunchYears(launchYearsArray);
-        setItems(response);
+        setItems(data);
     };
 
     return (
@@ -49,11 +49,26 @@ export const LaunchProvider = ({ children }) => {
                         return {
                             ...loadingState,
                             loading: true,
+                            error: false,
                         };
                     });
-                    GetLaunchesAPI(CONSTANTS.SPACE_X_API).then((response) => {
-                        if (response.data) handleSuccessResponse(response.data);
-                    });
+                    GetLaunchesAPI(CONSTANTS.SPACE_X_API)
+                        .then((response) => {
+                            let pastData;
+                            if (response.data) {
+                                pastData = response.data;
+                            } else return false;
+
+                            GetLaunchesAPI(CONSTANTS.SPACE_X_API_UPCOMING).then((responseUpcoming) => {
+                                if (responseUpcoming.data && pastData) {
+                                    pastData.concat(responseUpcoming.data);
+                                    handleSuccessResponse(pastData);
+                                }
+                            });
+                        })
+                        .catch((error) => {
+                            throw error;
+                        });
                 }, []),
                 items,
                 sort,

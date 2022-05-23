@@ -7,7 +7,8 @@ const CONSTANTS = {
     LOGO: logo,
     SPACE_X_IMAGE: launchHomeImage,
     SPACE_X_RETINA_IMAGES: `${launchHomeImage} 1x, ${launchHomeImageX2} 2x, ${launchHomeImageX3} 3x`,
-    SPACE_X_API: "https://api.spacexdata.com/v3/launches",
+    SPACE_X_API: "https://api.spacexdata.com/v3/launches/",
+    SPACE_X_API_UPCOMING: "https://api.spacexdata.com/v3/launches/upcoming",
     INCREMENT: 1,
 };
 

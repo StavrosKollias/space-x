@@ -33,7 +33,6 @@ export const axiosInterceptor = (setLoadingState) => {
 
         (error) => {
             numberOfCallsPending--;
-            // axios.CancelToken.source();
             const loadingState = {
                 loading: false,
                 error: true,

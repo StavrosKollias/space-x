@@ -19,7 +19,7 @@ export const Body = () => {
 
             {(loadingState.loading || loadingState.error) && <Loader />}
 
-            {!loadingState.loading && !loadingState.error && (
+            {!loadingState.loading && !loadingState.error && items.length > 0 && (
                 <div className='app__launches'>
                     <div className='app__filters'>
                         <Select classes='select' label={LABEL.FILTER_BY_YEAR} testId='filter-button-test' options={launchYears} />
