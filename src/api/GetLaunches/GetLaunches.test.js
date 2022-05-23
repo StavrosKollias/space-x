@@ -1,28 +1,22 @@
-import axios from "axios";
 import { GetLaunchesAPI } from "./GetLaunches";
-// const GetLaunchesAPI = (url) => {
-//     const onSuccess = (response) => {
-//         return response;
-//     };
+const unmockedFetch = global.fetch;
 
-//     const onError = (err) => {
-//         throw err;
-//     };
+beforeAll(() => {
+    global.fetch = () =>
+        Promise.resolve({
+            json: () => Promise.resolve([]),
+        });
+});
 
-//     return axios.get(url).then(onSuccess).catch(onError);
-// };
+afterAll(() => {
+    global.fetch = unmockedFetch;
+});
 
-jest.mock("axios");
+// This is actual testing suite
 describe("GetLaunchesAPI", () => {
-    it("fetches data from an API", async () => {
-        const data = { test: "data" };
-        axios.get.mockImplementationOnce(() => Promise.resolve(data));
-        await expect(GetLaunchesAPI("https://react")).resolves.toEqual(data);
-    });
-
-    it("fetches error from  API", async () => {
-        const errorMessage = "Network Error";
-        axios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)));
-        await expect(GetLaunchesAPI("https://react")).resolves.toEqual({ error: errorMessage });
+    test("API Retuns Array and works", async () => {
+        const json = await GetLaunchesAPI("https://testing_api/12");
+        expect(Array.isArray(json)).toEqual(true);
+        expect(json.length).toEqual(0);
     });
 });

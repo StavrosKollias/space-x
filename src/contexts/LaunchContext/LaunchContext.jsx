@@ -34,10 +34,17 @@ export const LaunchProvider = ({ children }) => {
     const [filter, setFilter] = React.useState("");
     const [loadingState, setLoadingState] = React.useState(loadingStateInitial);
 
-    const handleSuccessResponse = (data) => {
-        const launchYearsArray = GetYearsArray(data);
+    const handleSuccessResponse = (response) => {
+        const launchYearsArray = GetYearsArray(response);
         setLaunchYears(launchYearsArray);
-        setItems(data);
+        setItems(response);
+        setLoadingState((loadingState) => {
+            return {
+                ...loadingState,
+                loading: false,
+                error: false,
+            };
+        });
     };
 
     return (
@@ -49,26 +56,18 @@ export const LaunchProvider = ({ children }) => {
                         return {
                             ...loadingState,
                             loading: true,
-                            error: false,
                         };
                     });
-                    GetLaunchesAPI(CONSTANTS.SPACE_X_API)
-                        .then((response) => {
-                            let pastData;
-                            if (response.data) {
-                                pastData = response.data;
-                            } else return false;
-
-                            GetLaunchesAPI(CONSTANTS.SPACE_X_API_UPCOMING).then((responseUpcoming) => {
-                                if (responseUpcoming.data && pastData) {
-                                    pastData.concat(responseUpcoming.data);
-                                    handleSuccessResponse(pastData);
-                                }
-                            });
-                        })
-                        .catch((error) => {
-                            throw error;
-                        });
+                    const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API, setLoadingState);
+                    response.error
+                        ? setLoadingState((loadingState) => {
+                              return {
+                                  ...loadingState,
+                                  loading: false,
+                                  error: true,
+                              };
+                          })
+                        : handleSuccessResponse(response);
                 }, []),
                 items,
                 sort,
