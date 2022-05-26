@@ -56,9 +56,10 @@ export const LaunchProvider = ({ children }) => {
                         return {
                             ...loadingState,
                             loading: true,
+                            error: false,
                         };
                     });
-                    const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API, setLoadingState);
+                    const response = await GetLaunchesAPI(CONSTANTS.SPACE_X_API);
                     response.error
                         ? setLoadingState((loadingState) => {
                               return {

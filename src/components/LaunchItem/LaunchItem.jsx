@@ -3,7 +3,7 @@ import moment from "moment";
 
 export const LaunchItem = ({ item, index }) => {
     const { flight_number, mission_name, launch_date_utc, rocket } = item;
-    const { rocket_name } = rocket;
+    const { rocket_name = "" } = rocket;
     const dateFormat = moment(launch_date_utc).format("Do MMMM YYYY");
     return (
         <li data-testid='launchItem-component' className='launch-list__item' key={index}>
